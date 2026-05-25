@@ -6,7 +6,7 @@ repository: https://github.com/bitsydarel/bd_l10n
 issue_tracker: https://github.com/bitsydarel/bd_l10n/issues
 
 environment:
-  sdk: '>=2.13.4 <3.0.0'
+  sdk: '>=3.7.0 <4.0.0'
 
 dependencies:
   # provide ability to parse command line arguments.
@@ -16,7 +16,7 @@ dependencies:
   build_config: ^1.0.0
   io: ^1.0.3
   # Allow to generate json conversion from annotation.
-  json_annotation: ^4.1.0
+  json_annotation: ^4.9.0
   # Provide metadata annotation that help make code intention more clear.
   meta: ^1.7.0
   # provide utility method to work with path
@@ -27,11 +27,11 @@ dependencies:
   yaml: ^3.1.0
 
 dev_dependencies:
-  build_runner: ^2.0.6
+  build_runner: ^2.5.4
   # project code style.
   flutter_code_style: ^2.1.0
   # create json conversion utility.
-  json_serializable: ^5.0.0
+  json_serializable: ^6.9.0
   test: ^1.17.10
 
 executables:

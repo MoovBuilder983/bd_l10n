@@ -15,7 +15,7 @@ flutter pub run bd_l10n --config-file bd_l10n.yaml .
 Build runner:
 
 ```shell
-flutter pub run build_runner build --delete-conflicting-outputs
+flutter pub run build_runner build
 ```
 
 Then uncomment the code in the main.dart file, after that you can run the app and explore it.

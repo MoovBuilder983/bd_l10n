@@ -1,10 +1,3 @@
-/*
- * The Clear BSD License
- *
- * Copyright (c) 2021 Bitsy Darel
- * All rights reserved.
- */
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -16,14 +9,16 @@ import 'application_feature_en.dart';
 import 'application_feature_es.dart';
 import 'application_feature_fr.dart';
 
-/// Callers can lookup localized strings with an instance of ApplicationFeature returned
-/// by `ApplicationFeature.of(context)`.
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of ApplicationFeature
+/// returned by `ApplicationFeature.of(context)`.
 ///
 /// Applications need to include `ApplicationFeature.delegate()` in their app's
-/// localizationDelegates list, and the locales they support in the app's
-/// supportedLocales list. For example:
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
 ///
-/// ```
+/// ```dart
 /// import 'application/application_feature.dart';
 ///
 /// return MaterialApp(
@@ -38,14 +33,14 @@ import 'application_feature_fr.dart';
 /// Please make sure to update your pubspec.yaml to include the following
 /// packages:
 ///
-/// ```
+/// ```yaml
 /// dependencies:
 ///   # Internationalization support.
 ///   flutter_localizations:
 ///     sdk: flutter
 ///   intl: any # Use the pinned version from flutter_localizations
 ///
-///   # rest of dependencies
+///   # Rest of dependencies
 /// ```
 ///
 /// ## iOS Applications
@@ -68,17 +63,15 @@ import 'application_feature_fr.dart';
 /// be consistent with the languages listed in the ApplicationFeature.supportedLocales
 /// property.
 abstract class ApplicationFeature {
-  ApplicationFeature(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  ApplicationFeature(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static ApplicationFeature of(BuildContext context) {
-    return Localizations.of<ApplicationFeature>(context, ApplicationFeature)!;
+  static ApplicationFeature? of(BuildContext context) {
+    return Localizations.of<ApplicationFeature>(context, ApplicationFeature);
   }
 
-  static const LocalizationsDelegate<ApplicationFeature> delegate =
-      _ApplicationFeatureDelegate();
+  static const LocalizationsDelegate<ApplicationFeature> delegate = _ApplicationFeatureDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -90,8 +83,7 @@ abstract class ApplicationFeature {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -124,38 +116,35 @@ abstract class ApplicationFeature {
   String get incrementButton;
 }
 
-class _ApplicationFeatureDelegate
-    extends LocalizationsDelegate<ApplicationFeature> {
+class _ApplicationFeatureDelegate extends LocalizationsDelegate<ApplicationFeature> {
   const _ApplicationFeatureDelegate();
 
   @override
   Future<ApplicationFeature> load(Locale locale) {
-    return SynchronousFuture<ApplicationFeature>(
-        _lookupApplicationFeature(locale));
+    return SynchronousFuture<ApplicationFeature>(lookupApplicationFeature(locale));
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'es', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_ApplicationFeatureDelegate old) => false;
 }
 
-ApplicationFeature _lookupApplicationFeature(Locale locale) {
-// Lookup logic when only language code is specified.
+ApplicationFeature lookupApplicationFeature(Locale locale) {
+
+
+  // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return ApplicationFeatureEn();
-    case 'es':
-      return ApplicationFeatureEs();
-    case 'fr':
-      return ApplicationFeatureFr();
+    case 'en': return ApplicationFeatureEn();
+    case 'es': return ApplicationFeatureEs();
+    case 'fr': return ApplicationFeatureFr();
   }
 
   throw FlutterError(
-      'ApplicationFeature.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'ApplicationFeature.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }

@@ -1,11 +1,8 @@
-/*
- * The Clear BSD License
- *
- * Copyright (c) 2021 Bitsy Darel
- * All rights reserved.
- */
-
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'authentication_feature.dart';
+
+// ignore_for_file: type=lint
 
 /// The translations for English (`en`).
 class AuthenticationFeatureEn extends AuthenticationFeature {

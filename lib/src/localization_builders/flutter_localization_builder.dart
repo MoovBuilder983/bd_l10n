@@ -49,7 +49,6 @@ class FlutterLocalizationBuilder extends LocalizationBuilder {
         feature.translationTemplateFileName,
         '--arb-dir',
         path.join(configuration.projectDirPath, feature.translationDirPath),
-        '--no-synthetic-package',
         '--output-dir',
         path.join(configuration.projectDirPath, feature.outputDirPath),
         '--output-localization-file',

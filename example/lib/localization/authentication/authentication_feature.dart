@@ -1,10 +1,3 @@
-/*
- * The Clear BSD License
- *
- * Copyright (c) 2021 Bitsy Darel
- * All rights reserved.
- */
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -14,14 +7,16 @@ import 'package:intl/intl.dart' as intl;
 
 import 'authentication_feature_en.dart';
 
-/// Callers can lookup localized strings with an instance of AuthenticationFeature returned
-/// by `AuthenticationFeature.of(context)`.
+// ignore_for_file: type=lint
+
+/// Callers can lookup localized strings with an instance of AuthenticationFeature
+/// returned by `AuthenticationFeature.of(context)`.
 ///
 /// Applications need to include `AuthenticationFeature.delegate()` in their app's
-/// localizationDelegates list, and the locales they support in the app's
-/// supportedLocales list. For example:
+/// `localizationDelegates` list, and the locales they support in the app's
+/// `supportedLocales` list. For example:
 ///
-/// ```
+/// ```dart
 /// import 'authentication/authentication_feature.dart';
 ///
 /// return MaterialApp(
@@ -36,14 +31,14 @@ import 'authentication_feature_en.dart';
 /// Please make sure to update your pubspec.yaml to include the following
 /// packages:
 ///
-/// ```
+/// ```yaml
 /// dependencies:
 ///   # Internationalization support.
 ///   flutter_localizations:
 ///     sdk: flutter
 ///   intl: any # Use the pinned version from flutter_localizations
 ///
-///   # rest of dependencies
+///   # Rest of dependencies
 /// ```
 ///
 /// ## iOS Applications
@@ -66,18 +61,15 @@ import 'authentication_feature_en.dart';
 /// be consistent with the languages listed in the AuthenticationFeature.supportedLocales
 /// property.
 abstract class AuthenticationFeature {
-  AuthenticationFeature(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AuthenticationFeature(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static AuthenticationFeature of(BuildContext context) {
-    return Localizations.of<AuthenticationFeature>(
-        context, AuthenticationFeature)!;
+  static AuthenticationFeature? of(BuildContext context) {
+    return Localizations.of<AuthenticationFeature>(context, AuthenticationFeature);
   }
 
-  static const LocalizationsDelegate<AuthenticationFeature> delegate =
-      _AuthenticationFeatureDelegate();
+  static const LocalizationsDelegate<AuthenticationFeature> delegate = _AuthenticationFeatureDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -89,8 +81,7 @@ abstract class AuthenticationFeature {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -98,7 +89,9 @@ abstract class AuthenticationFeature {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en')
+  ];
 
   /// The text on the login button.
   ///
@@ -119,34 +112,33 @@ abstract class AuthenticationFeature {
   String get passwordField;
 }
 
-class _AuthenticationFeatureDelegate
-    extends LocalizationsDelegate<AuthenticationFeature> {
+class _AuthenticationFeatureDelegate extends LocalizationsDelegate<AuthenticationFeature> {
   const _AuthenticationFeatureDelegate();
 
   @override
   Future<AuthenticationFeature> load(Locale locale) {
-    return SynchronousFuture<AuthenticationFeature>(
-        _lookupAuthenticationFeature(locale));
+    return SynchronousFuture<AuthenticationFeature>(lookupAuthenticationFeature(locale));
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AuthenticationFeatureDelegate old) => false;
 }
 
-AuthenticationFeature _lookupAuthenticationFeature(Locale locale) {
-// Lookup logic when only language code is specified.
+AuthenticationFeature lookupAuthenticationFeature(Locale locale) {
+
+
+  // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AuthenticationFeatureEn();
+    case 'en': return AuthenticationFeatureEn();
   }
 
   throw FlutterError(
-      'AuthenticationFeature.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AuthenticationFeature.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }
