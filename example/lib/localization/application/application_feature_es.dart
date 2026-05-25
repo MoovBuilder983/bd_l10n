@@ -1,4 +1,8 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'application_feature.dart';
+
+// ignore_for_file: type=lint
 
 /// The translations for Spanish Castilian (`es`).
 class ApplicationFeatureEs extends ApplicationFeature {
@@ -14,5 +18,6 @@ class ApplicationFeatureEs extends ApplicationFeature {
   String get incrementButton => 'Incremento';
 
   @override
-  String get unTranslatedMessage => 'Hey, i\'m here to showcase messages that are not translated';
+  String get unTranslatedMessage =>
+      'Hey, i\'m here to showcase messages that are not translated';
 }

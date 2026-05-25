@@ -1,4 +1,8 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
 import 'application_feature.dart';
+
+// ignore_for_file: type=lint
 
 /// The translations for English (`en`).
 class ApplicationFeatureEn extends ApplicationFeature {
@@ -14,5 +18,6 @@ class ApplicationFeatureEn extends ApplicationFeature {
   String get incrementButton => 'Increment';
 
   @override
-  String get unTranslatedMessage => 'Hey, i\'m here to showcase messages that are not translated';
+  String get unTranslatedMessage =>
+      'Hey, i\'m here to showcase messages that are not translated';
 }

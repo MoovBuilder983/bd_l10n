@@ -29,6 +29,8 @@ dependencies:
   intl: ^0.20.0
 
 dev_dependencies:
+  bd_l10n:
+    path: ../
   build_runner: ^2.4.6
   flutter_code_style: ^2.2.0
 
@@ -37,6 +39,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
