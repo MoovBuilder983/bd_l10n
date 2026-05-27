@@ -16,4 +16,8 @@ class ApplicationFeatureFr extends ApplicationFeature {
 
   @override
   String get incrementButton => 'Incrémenter';
+
+  @override
+  String get unTranslatedMessage =>
+      'Hey, i\'m here to showcase messages that are not translated';
 }

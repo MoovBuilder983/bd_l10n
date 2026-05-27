@@ -63,7 +63,8 @@ import 'application_feature_fr.dart';
 /// be consistent with the languages listed in the ApplicationFeature.supportedLocales
 /// property.
 abstract class ApplicationFeature {
-  ApplicationFeature(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  ApplicationFeature(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,7 +72,8 @@ abstract class ApplicationFeature {
     return Localizations.of<ApplicationFeature>(context, ApplicationFeature);
   }
 
-  static const LocalizationsDelegate<ApplicationFeature> delegate = _ApplicationFeatureDelegate();
+  static const LocalizationsDelegate<ApplicationFeature> delegate =
+      _ApplicationFeatureDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,18 +85,19 @@ abstract class ApplicationFeature {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('es'),
-    Locale('fr')
+    Locale('fr'),
   ];
 
   /// The title of the application
@@ -109,42 +112,53 @@ abstract class ApplicationFeature {
   /// **'You have pushed the button this many times:'**
   String get homeDescription;
 
-  /// The increment button text
+  /// Demo text, not used in the app
   ///
   /// In en, this message translates to:
   /// **'Increment'**
   String get incrementButton;
+
+  /// No description provided for @unTranslatedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Hey, i\'m here to showcase messages that are not translated'**
+  String get unTranslatedMessage;
 }
 
-class _ApplicationFeatureDelegate extends LocalizationsDelegate<ApplicationFeature> {
+class _ApplicationFeatureDelegate
+    extends LocalizationsDelegate<ApplicationFeature> {
   const _ApplicationFeatureDelegate();
 
   @override
   Future<ApplicationFeature> load(Locale locale) {
-    return SynchronousFuture<ApplicationFeature>(lookupApplicationFeature(locale));
+    return SynchronousFuture<ApplicationFeature>(
+      lookupApplicationFeature(locale),
+    );
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'es', 'fr'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'es', 'fr'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_ApplicationFeatureDelegate old) => false;
 }
 
 ApplicationFeature lookupApplicationFeature(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return ApplicationFeatureEn();
-    case 'es': return ApplicationFeatureEs();
-    case 'fr': return ApplicationFeatureFr();
+    case 'en':
+      return ApplicationFeatureEn();
+    case 'es':
+      return ApplicationFeatureEs();
+    case 'fr':
+      return ApplicationFeatureFr();
   }
 
   throw FlutterError(
     'ApplicationFeature.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

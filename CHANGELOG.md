@@ -1,3 +1,10 @@
+## 1.5.0
+
+- Updated minimum Dart SDK requirement to 3.5.0.
+- Localization class now are formatted automatically with dart format.
+- Localization class now use named parameters for better readability.
+- Dependency versions updated for better compatibility and stability.
+
 ## 1.0.0
 
 - Initial stable release, with support for flutter localization, file watcher and more.
@@ -13,3 +20,16 @@
 - Run localization Process in a shell under Windows
 - Updated Android build config for example
 - Fix test name to conform with Flutter standard
+
+## 1.3.0
+
+- Added support for dart 3.0.0
+- Added support for translation in lib folder.
+
+## 1.4.0
+
+- Added support for untranslated message report
+
+## 1.4.1
+
+- Make Localization class of method to return a not-null value.
